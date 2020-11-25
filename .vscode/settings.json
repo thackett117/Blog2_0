@@ -1,12 +1,24 @@
 {
     "cSpell.ignoreWords": [
+        "accesstokenid",
+        "await",
+        "barebones",
+        "barebones react typescript express",
+        "bearerstrategy",
         "blog",
         "blogid",
         "blogstags",
         "blogtags",
         "dbport",
+        "express",
+        "foxmccloud",
+        "localstrategy",
+        "react",
         "setnew",
         "setnew blog",
-        "tagid"
+        "tagid",
+        "tokenid",
+        "typescript",
+        "userid"
     ]
 }

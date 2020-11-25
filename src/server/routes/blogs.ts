@@ -1,7 +1,16 @@
 import * as express from 'express';
+import { RequestHandler } from 'express-serve-static-core';
 import db from '../db';
 
 const router: express.Router = express.Router();
+
+const isAdmin: RequestHandler = (req, res, next) => {
+    if(!req.user || req.user.role !== 'admin') {
+        return res.sendStatus(401);
+    } else {
+        return next();
+    }
+};
 
 router.get('/', async (req: express.Request, res: express.Response) => {
     try {
@@ -28,17 +37,17 @@ router.get('/:id', async(req: express.Request, res: express.Response) => {
 
 router.post('/', async(req: express.Request, res: express.Response) => {
     try {
-        const author = req.body.author;
+        // const author = req.body.author;
         const blog = req.body.blog;
         const blogTags = req.body.blog.tags;
 
-        const newAuthor = await db.Authors.insert(author.name, author.email);
+        // const newAuthor = await db.Authors.insert(author.name, author.email);
         const newBlog = await db.Blogs.insert(blog.title, blog.content, newAuthor.insertId);
         const newBlogTags = await db.BlogTags.insert(newBlog.insertId, blogTags);
 
-        res.status(200).send(`
-            author created with id: ${newAuthor.insertId}
-            blog created with id: ${newBlog.insertId}
+        res.status(200).send(
+            // author created with id: ${newAuthor.insertId}
+            `blog created with id: ${newBlog.insertId}
         `);
     } catch(err) {
         console.log(err);
