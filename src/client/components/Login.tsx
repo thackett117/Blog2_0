@@ -1,13 +1,20 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { newAuthor } from '../types'
-import { json, SetAccessToken} from '../utils/api';
+import { json, SetAccessToken, User} from '../utils/api';
 
 const Login: React.FC<ILoginProps> = (props: ILoginProps) => {
     const [newAuthor, setNewAuthor] = React.useState<newAuthor>({
         email: "",
         password: "",
     });
+
+    React.useEffect(() => {
+        if(User && User.role === 'admin') {
+            alert('You are already logged in!');
+            props.history.push('/')
+        }
+    }, [])
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setNewAuthor({
         email: e.target.value,

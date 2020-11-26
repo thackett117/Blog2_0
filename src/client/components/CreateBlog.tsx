@@ -17,6 +17,8 @@ const CreateBlog: React.FC<CreateBlogProps> = (props: CreateBlogProps) => {
         },
     });
 
+    
+
     React.useEffect(() => {
         if(!User || User.userid === null || User.role !== 'admin'){
             props.history.replace('/blog/login')
@@ -87,7 +89,13 @@ const CreateBlog: React.FC<CreateBlogProps> = (props: CreateBlogProps) => {
     });
 
     const postBlog = async () => {
-        let result =  await json('/api/blogs', 'POST', newBlog);
+        try {
+            let result =  await json('/api/blogs', 'POST', newBlog);
+        } catch(err) {
+            console.log(err);
+            throw err;
+        }
+        
 
         // await fetch("/api/blogs/", {
         //     method: "POST",
