@@ -4,31 +4,35 @@ import Home from './components/Home';
 import SingleBlog from './components/SingleBlog';
 import EditBlog from './components/EditBlog';
 import CreateBlog from './components/CreateBlog';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
  
 const App = (props: AppProps) => {
 	return (
 		<Router>
-		  <div>
+		  {/* <div>
 			<nav>
 			  <ul>
 				<li>
 				  <Link to="/">Home</Link>
 				</li>
 				<li>
-				  <Link to="/blog/create">Create Blog</Link>
+				  <Link to="/blog/create">Admin</Link>
 				</li>
 			  </ul>
-			</nav>
+			</nav> */}
+			<NavBar />
 	
 			{/* A <Switch> looks through its children <Route>s and
 				renders the first one that matches the current URL. */}
 			<Switch>
-				<Route path="/blog/create" component={CreateBlog} />
-				<Route path="/blog/:id/admin" component={EditBlog} />
-				<Route path="/blog/:id" component={SingleBlog} />
-				<Route path="/" component={Home} />
+				<Route exact path="/blog/login" component={Login} />
+				<Route exact path="/blog/create" component={CreateBlog} />
+				<Route exact path="/blog/:id/admin" component={EditBlog} />
+				<Route exact path="/blog/:id" component={SingleBlog} />
+				<Route exact path="/" component={Home} />
 			</Switch>
-		  </div>
+		  {/* </div> */}
 		</Router>
 	  );
 };

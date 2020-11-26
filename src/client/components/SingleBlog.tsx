@@ -1,6 +1,7 @@
 import React from 'react';
 import { blog } from '../types';
-import { RouteComponentProps, Link } from 'react-router-dom'
+import { RouteComponentProps, Link } from 'react-router-dom';
+import { json } from '../utils/api';
 
 
 const SingleBlog: React.FC<SingleBlogProps> = (props: SingleBlogProps) => {
@@ -14,8 +15,9 @@ const SingleBlog: React.FC<SingleBlogProps> = (props: SingleBlogProps) => {
 
     React.useEffect(() => {
         (async () => {
-            let data = await fetch(`/api/blogs/${props.match.params.id}`);
-            let blog = await data.json();
+            let blog = await json(`/api/blogs/${props.match.params.id}`)
+            // let data = await fetch(`/api/blogs/${props.match.params.id}`);
+            // let blog = await data.json();
             setBlog(blog);
         })();
     }, []);
@@ -29,7 +31,10 @@ const SingleBlog: React.FC<SingleBlogProps> = (props: SingleBlogProps) => {
                     {blog.tags?.map((tag: { name: string }) => <span className="badge badge-pill badge-secondary">{tag.name}</span>)}
                     <p className="card-text">{blog.content}</p>
                     <Link to={`/blog/${blog.id}/admin`}>
-                        <button className="btn btn-sm btn-outline-dark">Admin Options</button>
+                        <button className="btn btn-sm btn-outline-dark float-right mx-1 mt-3">Admin Options</button>
+                    </Link>
+                    <Link to={`/`}>
+                        <button className="btn btn-sm btn-outline-dark float-right mx-1 mt-3">Go Back</button>
                     </Link>
                 </div>
             </div>

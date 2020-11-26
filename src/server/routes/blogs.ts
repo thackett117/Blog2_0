@@ -42,9 +42,10 @@ router.post('/', async(req: express.Request, res: express.Response) => {
         const blogTags = req.body.blog.tags;
 
         // const newAuthor = await db.Authors.insert(author.name, author.email);
-        const newBlog = await db.Blogs.insert(blog.title, blog.content, newAuthor.insertId);
+        const newBlog = await db.Blogs.insert(blog.title, blog.content, blog.authorid);
         const newBlogTags = await db.BlogTags.insert(newBlog.insertId, blogTags);
 
+        res.json({message: 'Blogged!'})
         res.status(200).send(
             // author created with id: ${newAuthor.insertId}
             `blog created with id: ${newBlog.insertId}
@@ -62,6 +63,7 @@ router.put('/:id', async(req: express.Request, res: express.Response) => {
 
         await db.Blogs.update(content, id);
 
+        res.json({message: 'Blogged!'})
         res.status(200).send(`blog edited as id: ${id}`);
     } catch(err) {
         console.log(err);
@@ -76,6 +78,7 @@ router.delete('/:id', async(req: express.Request, res: express.Response) => {
         await db.BlogTags.deleteBlogTags(id);
         await db.Blogs.destroy(id);
 
+        res.json({message: 'Blogged!'})
         res.status(200).send(`blog deleted at id: ${id}`);
     } catch(err) {
         console.log(err);

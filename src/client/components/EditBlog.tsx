@@ -1,6 +1,7 @@
 import React from "react";
 import { blog } from "../types";
 import { RouteComponentProps } from "react-router-dom";
+import { json, User} from '../utils/api';
 
 const EditBlog: React.FC<EditBlogProps> = (props: EditBlogProps) => {
     const [blog, setBlog] = React.useState<blog>({
@@ -11,6 +12,9 @@ const EditBlog: React.FC<EditBlogProps> = (props: EditBlogProps) => {
     });
 
     React.useEffect(() => {
+        if(!User || User.userid === null || User.role !== 'admin'){
+            props.history.replace('/blog/login')
+        }
         (async () => {
             let data = await fetch(`/api/blogs/${props.match.params.id}`);
             let blog = await data.json();

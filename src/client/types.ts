@@ -7,13 +7,20 @@ export interface blog {
 }
 
 export interface newBlog {
-    author: {
+    author?: {
         name: string,
         email: string
     },
     blog: {
         title: string,
         content: string, 
+        authorid: number
         tags: string[]
     },
+}
+
+export interface newAuthor {
+    email: string,
+    password: string,
+    loginStatus?: boolean
 }

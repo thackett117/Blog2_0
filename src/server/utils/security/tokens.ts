@@ -6,7 +6,7 @@ import DB from '../../db';
 
 
 export const CreateToken = async (payload: IPayload) => {
-    let tokenid: any = await DB.Tokens.insert(payload.authorid);
+    let tokenid: any = await DB.Tokens.insert(payload.userid);
     payload.accesstokenid = tokenid.insertId;
     payload.unique = crypto.randomBytes(32).toString('hex');
     let token = await jwt.sign(payload, config.auth.secret);
