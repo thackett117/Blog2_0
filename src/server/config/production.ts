@@ -1,6 +1,6 @@
 export default {
     mysql: {
-        host: process.env.DB_HOST,
+        host: process.env.DB_HOSTNAME,
         user: process.env.DB_USER,
         port: process.env.DB_PORT,
         password: process.env.DB_PASSWORD,
