@@ -14,11 +14,17 @@ const update = async (id: number, token: string) => Query(`
     UPDATE tokens
     SET token = '${token}'
     WHERE id = ${id}
+`);
+
+const remove = async(userid: number) => Query(`
+    DELETE FROM tokens
+    WHERE tokens.userid = ${userid};
 `)
 
 
 export default {
     findOne,
     insert,
-    update
+    update,
+    remove
 }

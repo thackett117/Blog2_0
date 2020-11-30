@@ -16,7 +16,7 @@ export const json = async <T = any>(uri: string, method: string = 'GET', body?: 
         headers['Authorization'] = `Bearer ${AccessToken}`
     }
 
-    try {
+    try { 
         let result = await fetch(uri, {
             method,
             headers,
